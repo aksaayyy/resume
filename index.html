@@ -124,8 +124,12 @@
     .section-alt .project-stack { color: #64748b; }
     .project-desc { font-size: 0.85rem; line-height: 1.6; color: #cbd5e1; }
     .section-alt .project-desc { color: #475569; }
-    .project-link { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 1rem; font-size: 0.8rem; font-weight: 600; color: #c084fc; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
-    .project-card:hover .project-link { opacity: 1; transform: translateY(0); }
+    .project-links { display: flex; gap: 1rem; margin-top: 1rem; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
+    .project-card:hover .project-links { opacity: 1; transform: translateY(0); }
+    .project-link { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; font-weight: 600; color: #c084fc; text-decoration: none; transition: color 0.3s ease; }
+    .project-link:hover { color: #f472b6; }
+    .project-link.live { color: #4ade80; }
+    .project-link.live:hover { color: #22c55e; }
 
     /* Skills */
     .skills-cloud { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
@@ -266,48 +270,71 @@
   <div class="section-label reveal">Projects</div>
   <h2 class="section-title reveal">Selected Builds</h2>
   <div class="projects-grid">
-    <a href="https://github.com/aksaayyy/article-forge" target="_blank" class="project-card">
+    <div class="project-card">
       <div class="project-accent"></div>
-      <div class="project-title">Article Forge</div>
-      <div class="project-stack">Node.js, Sanity CMS, Telegram, yt-dlp, FFmpeg</div>
-      <div class="project-desc">Autonomous pipeline for topic planning, SEO generation, media enrichment, internal linking, validation, and Sanity CMS publishing.</div>
-      <div class="project-link">View on GitHub &rarr;</div>
-    </a>
-    <a href="https://github.com/aksaayyy/ClipStream" target="_blank" class="project-card">
+      <div class="project-title">Woof &amp; Wag</div>
+      <div class="project-stack">Next.js, TypeScript, Sanity CMS, Tailwind CSS</div>
+      <div class="project-desc">Production dog-care content platform with 80+ vet-reviewed articles, Sanity auto-upload pipeline, interactive features, and background video effects.</div>
+      <div class="project-links">
+        <a href="https://woofnwagg.com" target="_blank" class="project-link live">Visit Site &rarr;</a>
+        <a href="https://github.com/aksaayyy/DogWebsite" target="_blank" class="project-link">GitHub &rarr;</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-accent"></div>
+      <div class="project-title">BrowserPixels</div>
+      <div class="project-stack">Astro, Web APIs, Tailwind CSS</div>
+      <div class="project-desc">Privacy-first, browser-based image processing — compress, convert, resize, and strip EXIF metadata locally. Files never leave the device.</div>
+      <div class="project-links">
+        <a href="https://browserpixels.com" target="_blank" class="project-link live">Visit Site &rarr;</a>
+        <a href="https://github.com/aksaayyy/browserpixels" target="_blank" class="project-link">GitHub &rarr;</a>
+      </div>
+    </div>
+    <div class="project-card">
       <div class="project-accent"></div>
       <div class="project-title">ClipStream</div>
       <div class="project-stack">Python, FastAPI, Whisper, FFmpeg, Docker</div>
       <div class="project-desc">Microservice pipeline for YouTube download, transcription, engagement scoring, clip selection, and vertical or square rendering.</div>
-      <div class="project-link">View on GitHub &rarr;</div>
-    </a>
-    <a href="https://github.com/aksaayyy/ai-trading-agent" target="_blank" class="project-card">
+      <div class="project-links">
+        <a href="https://github.com/aksaayyy/ClipStream" target="_blank" class="project-link">View on GitHub &rarr;</a>
+      </div>
+    </div>
+    <div class="project-card">
       <div class="project-accent"></div>
       <div class="project-title">APEX</div>
       <div class="project-stack">Python, ChromaDB, Redis, TimescaleDB, NautilusTrader</div>
       <div class="project-desc">Multi-agent debate architecture with domain agents, consensus decisions, market-regime analysis, Kelly sizing, and evaluated decision history.</div>
-      <div class="project-link">View on GitHub &rarr;</div>
-    </a>
-    <a href="https://github.com/aksaayyy/Vext-ai" target="_blank" class="project-card">
+      <div class="project-links">
+        <a href="https://github.com/aksaayyy/ai-trading-agent" target="_blank" class="project-link">View on GitHub &rarr;</a>
+      </div>
+    </div>
+    <div class="project-card">
       <div class="project-accent"></div>
       <div class="project-title">Vext</div>
       <div class="project-stack">TypeScript, React, Claude API, LLMs</div>
       <div class="project-desc">Tool that extracts code and execution logic from video tutorials into structured system prompts, setup guides, and actionable build plans.</div>
-      <div class="project-link">View on GitHub &rarr;</div>
-    </a>
-    <a href="https://github.com/aksaayyy/nova-pulse" target="_blank" class="project-card">
+      <div class="project-links">
+        <a href="https://github.com/aksaayyy/Vext-ai" target="_blank" class="project-link">View on GitHub &rarr;</a>
+      </div>
+    </div>
+    <div class="project-card">
       <div class="project-accent"></div>
       <div class="project-title">ProblemPulse</div>
       <div class="project-stack">Python, LLMs, Scrapers</div>
       <div class="project-desc">Agent pipeline that scrapes and clusters unstructured discussion data across sectors into scored, actionable product opportunities.</div>
-      <div class="project-link">View on GitHub &rarr;</div>
-    </a>
-    <a href="https://github.com/aksaayyy/Syncsphere" target="_blank" class="project-card">
+      <div class="project-links">
+        <a href="https://github.com/aksaayyy/nova-pulse" target="_blank" class="project-link">View on GitHub &rarr;</a>
+      </div>
+    </div>
+    <div class="project-card">
       <div class="project-accent"></div>
       <div class="project-title">SyncSphere</div>
       <div class="project-stack">Python, FastAPI, SQLAlchemy, React Native, Computer Vision</div>
       <div class="project-desc">Collaborative trip photo-sharing app with QR-based joining, RBAC, activity tracking, and computer vision photo clustering.</div>
-      <div class="project-link">View on GitHub &rarr;</div>
-    </a>
+      <div class="project-links">
+        <a href="https://github.com/aksaayyy/Syncsphere" target="_blank" class="project-link">View on GitHub &rarr;</a>
+      </div>
+    </div>
   </div>
 
   <!-- Future Projects — swap these placeholders when ready -->
