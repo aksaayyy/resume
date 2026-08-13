@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Akshay Kumar — AI & Backend Engineer. Building agentic systems, LLM pipelines, and production backend infrastructure.">
+  <meta property="og:title" content="Akshay Kumar — AI & Backend Engineer">
+  <meta property="og:description" content="Interactive resume of a developer building agentic systems and production backend infrastructure.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aksaayyy.github.io/resume">
+  <title>Akshay Kumar — AI & Backend Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            ink: '#0f0f1a',
+            navy: '#1a1a2e',
+            lavender: '#c084fc',
+            hot: '#f472b6',
+            coral: '#fb7185',
+            amber: '#fbbf24',
+            cyan: '#22d3ee',
+            electric: '#60a5fa',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { font-family: 'Inter', system-ui, sans-serif; background: #0f0f1a; color: #e2e8f0; overflow-x: hidden; }
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0f0f1a; }
+    ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+
+    /* Loader */
+    #loader { position: fixed; inset: 0; z-index: 9999; background: #0f0f1a; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease; }
+    #loader.done { opacity: 0; pointer-events: none; }
+    .loader-name { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; }
+    .loader-name span { display: inline-block; opacity: 0; transform: translateY(20px); }
+    .loader-sub { margin-top: 0.75rem; font-size: 0.9rem; color: #94a3b8; opacity: 0; }
+    .loader-bar { width: 120px; height: 2px; background: #1e293b; margin-top: 1.5rem; border-radius: 1px; overflow: hidden; }
+    .loader-bar-inner { width: 0%; height: 100%; background: linear-gradient(90deg, #c084fc, #f472b6, #fb7185); border-radius: 1px; }
+
+    /* Hero */
+    #hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 30%, rgba(192,132,252,0.22) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(244,114,182,0.18) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(34,211,238,0.08) 0%, transparent 60%), #0f0f1a; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: orbFloat 12s ease-in-out infinite; }
+    .orb-1 { width: 350px; height: 350px; background: #c084fc; top: 10%; left: 15%; animation-delay: 0s; }
+    .orb-2 { width: 280px; height: 280px; background: #f472b6; bottom: 20%; right: 10%; animation-delay: -4s; }
+    .orb-3 { width: 200px; height: 200px; background: #22d3ee; top: 50%; left: 60%; animation-delay: -8s; }
+    @keyframes orbFloat { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -40px) scale(1.08); } 66% { transform: translate(-20px, 30px) scale(0.95); } }
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; max-width: 800px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; color: #94a3b8; margin-bottom: 1.5rem; }
+    .hero-badge .pulse { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    .hero-title { font-size: clamp(2.8rem, 7vw, 4.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; background: linear-gradient(135deg, #fff 30%, #c084fc 50%, #f472b6 70%, #fb7185 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-tagline { font-size: clamp(1rem, 2.5vw, 1.25rem); color: #94a3b8; margin-top: 1rem; font-weight: 400; }
+    .hero-cta { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn { padding: 0.7rem 1.6rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary { background: linear-gradient(135deg, #c084fc, #f472b6); color: white; border: none; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(192,132,252,0.3); }
+    .btn-secondary { background: rgba(255,255,255,0.05); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.15); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); }
+    .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: #64748b; font-size: 0.75rem; animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+    /* Sections */
+    .section { position: relative; padding: 5rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .section-alt { background: #f8fafc; color: #1e293b; }
+    .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #c084fc; margin-bottom: 0.75rem; }
+    .section-alt .section-label { color: #7c3aed; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 1.5rem; }
+    .reveal { opacity: 0; transform: translateY(30px); }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    .stat-card { text-align: center; padding: 1.5rem; border-radius: 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
+    .section-alt .stat-card { background: white; border: 1px solid #e2e8f0; }
+    .stat-num { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #c084fc, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .stat-label { font-size: 0.8rem; color: #94a3b8; margin-top: 0.5rem; font-weight: 500; }
+    .section-alt .stat-label { color: #64748b; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, #c084fc, #f472b6, #fb7185); border-radius: 1px; }
+    .timeline-node { position: relative; margin-bottom: 2rem; }
+    .timeline-node::before { content: ''; position: absolute; left: -2rem; top: 0.3rem; width: 10px; height: 10px; border-radius: 50%; background: #f472b6; border: 2px solid #0f0f1a; transform: translateX(-4px); }
+    .section-alt .timeline-node::before { border-color: #f8fafc; }
+    .timeline-role { font-weight: 700; font-size: 1.1rem; }
+    .timeline-date { font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.5rem; }
+    .section-alt .timeline-date { color: #64748b; }
+    .timeline ul { list-style: none; padding: 0; }
+    .timeline li { position: relative; padding-left: 1.2rem; margin-bottom: 0.5rem; font-size: 0.9rem; line-height: 1.6; color: #cbd5e1; }
+    .section-alt .timeline li { color: #475569; }
+    .timeline li::before { content: '—'; position: absolute; left: 0; color: #c084fc; }
+    .section-alt .timeline li::before { color: #7c3aed; }
+
+    /* Project Cards */
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    @media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .projects-grid { grid-template-columns: 1fr; } }
+    .project-card { position: relative; border-radius: 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 1.5rem; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; text-decoration: none; color: inherit; display: block; }
+    .section-alt .project-card { background: white; border: 1px solid #e2e8f0; }
+    .project-card:hover { transform: translateY(-6px); border-color: rgba(192,132,252,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+    .project-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #c084fc, #f472b6); transform: scaleX(0); transition: transform 0.4s ease; }
+    .project-card:hover .project-accent { transform: scaleX(1); }
+    .project-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.25rem; }
+    .project-stack { font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.75rem; font-style: italic; }
+    .section-alt .project-stack { color: #64748b; }
+    .project-desc { font-size: 0.85rem; line-height: 1.6; color: #cbd5e1; }
+    .section-alt .project-desc { color: #475569; }
+    .project-link { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 1rem; font-size: 0.8rem; font-weight: 600; color: #c084fc; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
+    .project-card:hover .project-link { opacity: 1; transform: translateY(0); }
+
+    /* Skills */
+    .skills-cloud { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+    .skill-tag { padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; transition: all 0.3s ease; cursor: default; }
+    .skill-tag:hover { transform: translateY(-2px) scale(1.05); }
+    .skill-ai { background: rgba(192,132,252,0.12); color: #c084fc; border: 1px solid rgba(192,132,252,0.2); }
+    .skill-backend { background: rgba(34,211,238,0.12); color: #22d3ee; border: 1px solid rgba(34,211,238,0.2); }
+    .skill-data { background: rgba(96,165,250,0.12); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
+    .skill-frontend { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+    .section-alt .skill-ai { background: rgba(124,58,237,0.08); color: #7c3aed; border: 1px solid rgba(124,58,237,0.15); }
+    .section-alt .skill-backend { background: rgba(14,165,233,0.08); color: #0ea5e9; border: 1px solid rgba(14,165,233,0.15); }
+    .section-alt .skill-data { background: rgba(59,130,246,0.08); color: #3b82f6; border: 1px solid rgba(59,130,246,0.15); }
+    .section-alt .skill-frontend { background: rgba(217,119,6,0.08); color: #d97706; border: 1px solid rgba(217,119,6,0.15); }
+
+    /* Education */
+    .edu-card { padding: 1.5rem; border-radius: 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
+    .section-alt .edu-card { background: white; border: 1px solid #e2e8f0; }
+    .edu-degree { font-weight: 700; font-size: 1.1rem; }
+    .edu-school { color: #94a3b8; font-size: 0.9rem; }
+    .section-alt .edu-school { color: #64748b; }
+
+    /* Footer */
+    .footer-cta { text-align: center; padding: 5rem 1.5rem; }
+    .footer-cta h2 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 1rem; }
+    .footer-gradient-text { background: linear-gradient(135deg, #c084fc, #f472b6, #fb7185, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+    .footer-link { color: #94a3b8; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.3s ease; }
+    .footer-link:hover { color: #c084fc; }
+
+    /* Print */
+    @media print {
+      #loader, .orb, .scroll-hint { display: none !important; }
+      body { background: white !important; color: #1e293b !important; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-name">
+    <span>A</span><span>K</span><span>S</span><span>H</span><span>A</span><span>Y</span>
+    <span style="margin-left:0.3em">K</span><span>U</span><span>M</span><span>A</span><span>R</span>
+  </div>
+  <div class="loader-sub">Building intelligent systems</div>
+  <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+</div>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="hero-content">
+    <div class="hero-badge reveal"><span class="pulse"></span> Available for opportunities</div>
+    <h1 class="hero-title">Akshay Kumar</h1>
+    <p class="hero-tagline">AI & Backend Engineer — turning complex workflows into reliable products</p>
+    <div class="hero-cta">
+      <a href="https://github.com/aksaayyy" target="_blank" class="btn btn-primary">View GitHub</a>
+      <a href="Akshay_Kumar_AI_Backend_Engineer_Resume_1Page.pdf" download class="btn btn-secondary">Download PDF Resume</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v12M4 14l4 4 4-4"/></svg>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="section" id="stats">
+  <div class="section-label reveal">At a Glance</div>
+  <div class="stats-grid">
+    <div class="stat-card reveal"><div class="stat-num" data-target="44">0</div><div class="stat-label">Public Repositories</div></div>
+    <div class="stat-card reveal"><div class="stat-num" data-target="8">0</div><div class="stat-label">Production Systems</div></div>
+    <div class="stat-card reveal"><div class="stat-num" data-target="3">0</div><div class="stat-label">Core Languages</div></div>
+    <div class="stat-card reveal"><div class="stat-num" data-target="2025">0</div><div class="stat-label">B.Tech Graduate</div></div>
+  </div>
+</section>
+
+<!-- Profile -->
+<section class="section section-alt" id="profile">
+  <div class="section-label reveal">Profile</div>
+  <h2 class="section-title reveal">What I Do</h2>
+  <p class="reveal" style="font-size:1.05rem; line-height:1.8; max-width:700px;">
+    I build agentic systems, LLM pipelines, async services, and API integrations from architecture through deployment. 
+    Recent work spans autonomous publishing, AI video processing, market intelligence, and multi-agent trading 
+    using <strong>Python</strong>, <strong>FastAPI</strong>, <strong>TypeScript</strong>, <strong>Docker</strong>, <strong>Redis</strong>, <strong>PostgreSQL</strong>, and modern AI APIs.
+  </p>
+</section>
+
+<!-- Experience -->
+<section class="section" id="experience">
+  <div class="section-label reveal">Experience</div>
+  <h2 class="section-title reveal">Professional Journey</h2>
+  <div class="timeline reveal">
+    <div class="timeline-node">
+      <div class="timeline-role">Freelance Software Engineer</div>
+      <div class="timeline-date">2024 — Present</div>
+      <ul>
+        <li>Delivered backend and AI-assisted automation systems for private clients, owning requirements, architecture, integrations, and deployment.</li>
+        <li>Built a multi-tenant SaaS analytics product for keyword research, account analytics, competitor tracking, and comment mining with tiered product plans.</li>
+        <li>Architected a Facebook content pipeline for 10+ pages with Telegram ingestion, niche detection, scheduling, encrypted credential storage, and Graph API publishing.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="section section-alt" id="projects">
+  <div class="section-label reveal">Projects</div>
+  <h2 class="section-title reveal">Selected Builds</h2>
+  <div class="projects-grid">
+    <a href="https://github.com/aksaayyy/article-forge" target="_blank" class="project-card reveal">
+      <div class="project-accent"></div>
+      <div class="project-title">Article Forge</div>
+      <div class="project-stack">Node.js, Sanity CMS, Telegram, yt-dlp, FFmpeg</div>
+      <div class="project-desc">Autonomous pipeline for topic planning, SEO generation, media enrichment, internal linking, validation, and Sanity CMS publishing.</div>
+      <div class="project-link">View on GitHub &rarr;</div>
+    </a>
+    <a href="https://github.com/aksaayyy/ClipStream" target="_blank" class="project-card reveal">
+      <div class="project-accent"></div>
+      <div class="project-title">ClipStream</div>
+      <div class="project-stack">Python, FastAPI, Whisper, FFmpeg, Docker</div>
+      <div class="project-desc">Microservice pipeline for YouTube download, transcription, engagement scoring, clip selection, and vertical or square rendering.</div>
+      <div class="project-link">View on GitHub &rarr;</div>
+    </a>
+    <a href="https://github.com/aksaayyy/ai-trading-agent" target="_blank" class="project-card reveal">
+      <div class="project-accent"></div>
+      <div class="project-title">APEX</div>
+      <div class="project-stack">Python, ChromaDB, Redis, TimescaleDB, NautilusTrader</div>
+      <div class="project-desc">Multi-agent debate architecture with domain agents, consensus decisions, market-regime analysis, Kelly sizing, and evaluated decision history.</div>
+      <div class="project-link">View on GitHub &rarr;</div>
+    </a>
+    <a href="https://github.com/aksaayyy/Vext-ai" target="_blank" class="project-card reveal">
+      <div class="project-accent"></div>
+      <div class="project-title">Vext</div>
+      <div class="project-stack">TypeScript, React, Claude API, LLMs</div>
+      <div class="project-desc">Tool that extracts code and execution logic from video tutorials into structured system prompts, setup guides, and actionable build plans.</div>
+      <div class="project-link">View on GitHub &rarr;</div>
+    </a>
+    <a href="https://github.com/aksaayyy/nova-pulse" target="_blank" class="project-card reveal">
+      <div class="project-accent"></div>
+      <div class="project-title">ProblemPulse</div>
+      <div class="project-stack">Python, LLMs, Scrapers</div>
+      <div class="project-desc">Agent pipeline that scrapes and clusters unstructured discussion data across sectors into scored, actionable product opportunities.</div>
+      <div class="project-link">View on GitHub &rarr;</div>
+    </a>
+    <a href="https://github.com/aksaayyy/Syncsphere" target="_blank" class="project-card reveal">
+      <div class="project-accent"></div>
+      <div class="project-title">SyncSphere</div>
+      <div class="project-stack">Python, FastAPI, SQLAlchemy, React Native, Computer Vision</div>
+      <div class="project-desc">Collaborative trip photo-sharing app with QR-based joining, RBAC, activity tracking, and computer vision photo clustering.</div>
+      <div class="project-link">View on GitHub &rarr;</div>
+    </a>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="section" id="skills">
+  <div class="section-label reveal">Skills</div>
+  <h2 class="section-title reveal">Tech Stack</h2>
+  <div class="skills-cloud reveal">
+    <span class="skill-tag skill-ai">Multi-Agent Architecture</span>
+    <span class="skill-tag skill-ai">LLM APIs</span>
+    <span class="skill-tag skill-ai">Prompt Engineering</span>
+    <span class="skill-tag skill-ai">Semantic Memory</span>
+    <span class="skill-tag skill-backend">Python</span>
+    <span class="skill-tag skill-backend">FastAPI</span>
+    <span class="skill-tag skill-backend">REST APIs</span>
+    <span class="skill-tag skill-backend">Celery</span>
+    <span class="skill-tag skill-backend">TypeScript</span>
+    <span class="skill-tag skill-data">PostgreSQL</span>
+    <span class="skill-tag skill-data">Redis</span>
+    <span class="skill-tag skill-data">TimescaleDB</span>
+    <span class="skill-tag skill-data">ChromaDB</span>
+    <span class="skill-tag skill-data">Docker</span>
+    <span class="skill-tag skill-frontend">React</span>
+    <span class="skill-tag skill-frontend">Next.js</span>
+    <span class="skill-tag skill-frontend">Tailwind CSS</span>
+    <span class="skill-tag skill-backend">WebSockets</span>
+    <span class="skill-tag skill-backend">Async Workers</span>
+    <span class="skill-tag skill-data">Rate Limiting</span>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section section-alt" id="education">
+  <div class="section-label reveal">Education</div>
+  <h2 class="section-title reveal">Academic Background</h2>
+  <div class="edu-card reveal" style="max-width:500px;">
+    <div class="edu-degree">Bachelor of Technology in Computer Science</div>
+    <div class="edu-school">Chandigarh University &middot; 2025</div>
+  </div>
+</section>
+
+<!-- Footer -->
+<section class="footer-cta" id="contact">
+  <h2 class="reveal">Let's build<br><span class="footer-gradient-text">something together</span></h2>
+  <p class="reveal" style="color:#94a3b8; max-width:500px; margin:1rem auto 0; line-height:1.7;">
+    Open to full-time roles, contract work, and collaboration on AI-powered products.
+  </p>
+  <div class="footer-links reveal">
+    <a href="mailto:akshayr3435@gmail.com" class="footer-link">akshayr3435@gmail.com</a>
+    <a href="https://github.com/aksaayyy" target="_blank" class="footer-link">github.com/aksaayyy</a>
+    <a href="https://aksaayyy.github.io/Portfolio/" target="_blank" class="footer-link">Portfolio</a>
+    <a href="Akshay_Kumar_AI_Backend_Engineer_Resume_1Page.pdf" download class="footer-link">Download Resume</a>
+  </div>
+  <p style="color:#475569; font-size:0.75rem; margin-top:3rem;">&copy; 2026 Akshay Kumar. Built with HTML, CSS &amp; JavaScript.</p>
+</section>
+
+<script>
+  // Loader animation
+  const loader = document.getElementById('loader');
+  const nameSpans = document.querySelectorAll('.loader-name span');
+  const loaderSub = document.querySelector('.loader-sub');
+  const loaderBar = document.querySelector('.loader-bar-inner');
+
+  gsap.timeline()
+    .to(nameSpans, { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: 'power3.out' })
+    .to(loaderSub, { opacity: 1, duration: 0.4 }, '-=0.2')
+    .to(loaderBar, { width: '100%', duration: 1.2, ease: 'power2.inOut' })
+    .to(loader, { opacity: 0, duration: 0.5, ease: 'power2.out', onComplete: () => loader.classList.add('done') })
+    .add(() => initAnimations(), '-=0.3');
+
+  function initAnimations() {
+    // Lenis smooth scroll
+    const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+
+    // Hero reveal
+    gsap.from('.hero-badge', { opacity: 0, y: 20, duration: 0.8, delay: 0.2, ease: 'power3.out' });
+    gsap.from('.hero-title', { opacity: 0, y: 40, duration: 1, delay: 0.4, ease: 'power3.out' });
+    gsap.from('.hero-tagline', { opacity: 0, y: 20, duration: 0.8, delay: 0.7, ease: 'power3.out' });
+    gsap.from('.hero-cta', { opacity: 0, y: 20, duration: 0.8, delay: 0.9, ease: 'power3.out' });
+    gsap.from('.scroll-hint', { opacity: 0, duration: 1, delay: 1.2, ease: 'power2.out' });
+
+    // Section reveals
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(el => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 30,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+      });
+    });
+
+    // Stat counters
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const target = parseInt(el.dataset.target);
+      const obj = { val: 0 };
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          gsap.to(obj, {
+            val: target,
+            duration: 2,
+            ease: 'power2.out',
+            onUpdate: () => { el.textContent = Math.round(obj.val); }
+          });
+        }
+      });
+    });
+
+    // Timeline node pulse
+    document.querySelectorAll('.timeline-node').forEach((node, i) => {
+      gsap.from(node, {
+        opacity: 0,
+        x: -20,
+        duration: 0.6,
+        delay: i * 0.15,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: node, start: 'top 85%' }
+      });
+    });
+
+    // Project card stagger
+    document.querySelectorAll('.projects-grid').forEach(grid => {
+      const cards = grid.querySelectorAll('.project-card');
+      gsap.from(cards, {
+        opacity: 0,
+        y: 40,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: grid, start: 'top 80%' }
+      });
+    });
+
+    // Skill tag float-in
+    document.querySelectorAll('.skills-cloud').forEach(cloud => {
+      const tags = cloud.querySelectorAll('.skill-tag');
+      gsap.from(tags, {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.4,
+        stagger: 0.03,
+        ease: 'back.out(1.7)',
+        scrollTrigger: { trigger: cloud, start: 'top 85%' }
+      });
+    });
+
+    // Parallax orbs
+    gsap.to('.orb-1', { y: -60, scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+    gsap.to('.orb-2', { y: -40, scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+    gsap.to('.orb-3', { y: -80, scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+  }
+</script>
+
+</body>
+</html>
