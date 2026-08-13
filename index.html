@@ -154,11 +154,37 @@
     .footer-link { color: #94a3b8; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.3s ease; }
     .footer-link:hover { color: #c084fc; }
 
+    /* Coming Soon Cards */
+    .coming-soon-card {
+      position: relative; border-radius: 1rem; background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(255,255,255,0.12); padding: 1.5rem; overflow: hidden;
+      display: block; opacity: 1;
+    }
+    .section-alt .coming-soon-card { background: rgba(241,245,249,0.6); border: 1px dashed #cbd5e1; }
+    .coming-soon-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.25rem 0.75rem; border-radius: 999px;
+      background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2);
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+    .section-alt .coming-soon-badge { background: rgba(217,119,6,0.08); color: #d97706; border-color: rgba(217,119,6,0.15); }
+    .coming-soon-badge .dot { width: 5px; height: 5px; background: currentColor; border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; }
+    .coming-soon-title { font-weight: 700; font-size: 1.05rem; color: #e2e8f0; margin-bottom: 0.25rem; }
+    .section-alt .coming-soon-title { color: #334155; }
+    .coming-soon-desc { font-size: 0.85rem; line-height: 1.6; color: #64748b; }
+    .add-project-hint { text-align: center; margin-top: 1.5rem; font-size: 0.8rem; color: #64748b; }
+
     /* Print */
     @media print {
-      #loader, .orb, .scroll-hint { display: none !important; }
+      #loader, .orb, .scroll-hint, .coming-soon-card, .add-project-hint { display: none !important; }
       body { background: white !important; color: #1e293b !important; }
       .section { page-break-inside: avoid; }
+      .hero-bg { background: white !important; }
+      #hero { min-height: auto !important; padding: 2rem 0 !important; }
+      .btn, .footer-link { border: 1px solid #cbd5e1 !important; color: #1e293b !important; background: none !important; }
+      .project-card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+      .timeline::before { background: #cbd5e1 !important; }
     }
   </style>
 </head>
@@ -186,7 +212,7 @@
     <p class="hero-tagline">AI & Backend Engineer — turning complex workflows into reliable products</p>
     <div class="hero-cta">
       <a href="https://github.com/aksaayyy" target="_blank" class="btn btn-primary">View GitHub</a>
-      <a href="Akshay_Kumar_AI_Backend_Engineer_Resume_1Page.pdf" download class="btn btn-secondary">Download PDF Resume</a>
+      <a href="#" onclick="window.print(); return false;" class="btn btn-secondary">Print / Save as PDF</a>
     </div>
   </div>
   <div class="scroll-hint">
@@ -282,6 +308,27 @@
       <div class="project-link">View on GitHub &rarr;</div>
     </a>
   </div>
+
+  <!-- Future Projects — swap these placeholders when ready -->
+  <h2 class="section-title reveal" style="margin-top:4rem; font-size:clamp(1.4rem, 3vw, 2rem);">Future Builds</h2>
+  <div class="projects-grid" style="margin-top:1.5rem;">
+    <div class="coming-soon-card">
+      <div class="coming-soon-badge"><span class="dot"></span> Building</div>
+      <div class="coming-soon-title">Open Source Agent Toolkit</div>
+      <div class="coming-soon-desc">A reusable framework for spinning up multi-agent systems with memory, planning, and tool-use out of the box.</div>
+    </div>
+    <div class="coming-soon-card">
+      <div class="coming-soon-badge"><span class="dot"></span> Planning</div>
+      <div class="coming-soon-title">Real-Time Data Platform</div>
+      <div class="coming-soon-desc">Event-driven pipeline for ingesting, transforming, and serving live data streams with WebSocket fan-out.</div>
+    </div>
+    <div class="coming-soon-card">
+      <div class="coming-soon-badge"><span class="dot"></span> Ideation</div>
+      <div class="coming-soon-title">Developer Productivity Suite</div>
+      <div class="coming-soon-desc">CLI + VS Code extension combo for scaffolding backend services, API specs, and deployment configs.</div>
+    </div>
+  </div>
+  <p class="add-project-hint">Add your next shipped project above by copying a <code>.project-card</code> block and linking your repo.</p>
 </section>
 
 <!-- Skills -->
@@ -332,7 +379,7 @@
     <a href="mailto:akshayr3435@gmail.com" class="footer-link">akshayr3435@gmail.com</a>
     <a href="https://github.com/aksaayyy" target="_blank" class="footer-link">github.com/aksaayyy</a>
     <a href="https://aksaayyy.github.io/Portfolio/" target="_blank" class="footer-link">Portfolio</a>
-    <a href="Akshay_Kumar_AI_Backend_Engineer_Resume_1Page.pdf" download class="footer-link">Download Resume</a>
+    <a href="#" onclick="window.print(); return false;" class="footer-link">Print / Save as PDF</a>
   </div>
   <p style="color:#475569; font-size:0.75rem; margin-top:3rem;">&copy; 2026 Akshay Kumar. Built with HTML, CSS &amp; JavaScript.</p>
 </section>
