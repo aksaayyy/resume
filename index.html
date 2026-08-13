@@ -423,13 +423,15 @@
     // Section reveals
     const reveals = document.querySelectorAll('.reveal');
     reveals.forEach(el => {
-      gsap.from(el, {
-        opacity: 0,
-        y: 30,
-        duration: 0.7,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-      });
+      gsap.fromTo(el,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+        }
+      );
     });
 
     // Stat counters
@@ -453,14 +455,16 @@
 
     // Timeline node pulse
     document.querySelectorAll('.timeline-node').forEach((node, i) => {
-      gsap.from(node, {
-        opacity: 0,
-        x: -20,
-        duration: 0.6,
-        delay: i * 0.15,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: node, start: 'top 85%' }
-      });
+      gsap.fromTo(node,
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1, x: 0,
+          duration: 0.6,
+          delay: i * 0.15,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: node, start: 'top 85%' }
+        }
+      );
     });
 
     // Project card stagger
@@ -482,14 +486,16 @@
     // Skill tag float-in
     document.querySelectorAll('.skills-cloud').forEach(cloud => {
       const tags = cloud.querySelectorAll('.skill-tag');
-      gsap.from(tags, {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.4,
-        stagger: 0.03,
-        ease: 'back.out(1.7)',
-        scrollTrigger: { trigger: cloud, start: 'top 85%' }
-      });
+      gsap.fromTo(tags,
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 1, scale: 1,
+          duration: 0.4,
+          stagger: 0.03,
+          ease: 'back.out(1.7)',
+          scrollTrigger: { trigger: cloud, start: 'top 85%' }
+        }
+      );
     });
 
     // Parallax orbs
