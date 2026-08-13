@@ -113,8 +113,8 @@
     .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
     @media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 640px) { .projects-grid { grid-template-columns: 1fr; } }
-    .project-card { position: relative; border-radius: 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 1.5rem; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; text-decoration: none; color: inherit; display: block; }
-    .section-alt .project-card { background: white; border: 1px solid #e2e8f0; }
+    .project-card { position: relative; border-radius: 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 1.5rem; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; text-decoration: none; color: inherit; display: block; opacity: 1; }
+    .section-alt .project-card { background: #ffffff; border: 1px solid #cbd5e1; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04); }
     .project-card:hover { transform: translateY(-6px); border-color: rgba(192,132,252,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
     .project-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #c084fc, #f472b6); transform: scaleX(0); transition: transform 0.4s ease; }
     .project-card:hover .project-accent { transform: scaleX(1); }
@@ -413,14 +413,17 @@
     // Project card stagger
     document.querySelectorAll('.projects-grid').forEach(grid => {
       const cards = grid.querySelectorAll('.project-card');
-      gsap.from(cards, {
-        opacity: 0,
-        y: 40,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: grid, start: 'top 80%' }
-      });
+      gsap.fromTo(cards,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: grid, start: 'top 80%' }
+        }
+      );
     });
 
     // Skill tag float-in
